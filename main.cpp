@@ -16,7 +16,7 @@ int main(){
         if(d.isIn(dictionary[i])){
             cout << "Aye" <<endl;
         }else{
-            cout << "Shit" << endl;
+            cout << "Nope." << endl;
         }
     }
 }
