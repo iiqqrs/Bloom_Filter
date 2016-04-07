@@ -56,7 +56,7 @@ bloom::bloom() {
 bool bloom::isIn(string key) {
     bool allIn = true;
     for (int i = 0; i < 8; i++) {
-        if(array[hash(&key, key.size(), seeds[i])]) {
+        if(array[hash(&*key.begin(), key.size(), seeds[i])]) {
             continue;
         }
         else {
@@ -70,6 +70,6 @@ bool bloom::isIn(string key) {
 
 void bloom::insert(string key){
     for(int i=0; i<8; i++){
-        array.set(hash(&key, key.size(), seeds[i]), true);
+        array.set(hash(&*key.begin(), key.size(), seeds[i]), true);
     }
 }
