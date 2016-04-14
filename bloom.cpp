@@ -3,12 +3,10 @@
 #include "bloom.h"
 using namespace std;
 
-
-bloom::bloom() {
-    
+bloom::bloom(){
 }
 
-unsigned int bloom::hash( const void * key, int len, unsigned int seed ){
+unsigned int bloom::hash(const void * key, int len, unsigned int seed ){
     	// 'm' and 'r' are mixing constants generated offline.
     	// They're not really 'magic', they just happen to work well.
     
@@ -54,18 +52,16 @@ unsigned int bloom::hash( const void * key, int len, unsigned int seed ){
     	return (h % 800000);
 }
 
-bool bloom::isIn(string key) {
+bool bloom::isIn(string key){
     bool allIn = true;
     for (int i = 0; i < 8; i++) {
-        if(array[hash(&*key.begin(), key.size(), seeds[i])]) {
+        if(array[hash(&*key.begin(), key.size(), seeds[i])]){
             continue;
-        }
-        else {
+        }else{
             allIn = false;
             break;
         }
     }
-    
     return allIn;
 }
 
