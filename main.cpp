@@ -1,22 +1,27 @@
 #include <iostream>
+#include <fstream>
+#include <sstream>
+#include <cassert>
 #include "bloom.cpp"
-#include <bitset>
 using namespace std;
 
 int main(){
-    string dictionary[5] = {"this", "group", "is", "the", "best"};
     bloom d;
+    string line;
+    ifstream wrds ("wrds.txt");
+    ifstream wrds_check ("wrds_check.txt");
     
-    for(int i=0; i<5; i++){
-        d.insert(dictionary[i]);
+    while(getline(wrds,line)){
+        d.insert(line);
     }
+    cout << "Finished loading dictionary" << endl;
     
-    //Tests
-    for(int i=0; i<5; i++){
-        if(d.isIn(dictionary[i])){
-            cout << "Aye" <<endl;
-        }else{
-            cout << "Nope." << endl;
+    //Time to spellcheck
+    while(getline(wrds_check,line)){
+        if(!d.isIn(line)){
+            cout <<"\"" << line << "\"" << " is not in the loaded dictionary!" << endl;
         }
     }
+    cout << "Done All" << endl;
+    
 }
